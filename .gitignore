@@ -1,0 +1,12 @@
+venv
+build
+node_modules
+*.pyc
+**/__pycache__/**
+__pycache__
+.env
+__sapper__
+yarn-error.log
+.DS_Store
+.vscode
+.pytest_cache

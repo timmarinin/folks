@@ -1,0 +1,68 @@
+:root {
+    --accent-color: #0e6c82;
+	--main-text-color: #222;
+	--main-color: #0e6c82;
+	--main-hover-color: #107a93;
+	--main-active-color: #0b7088;
+	--button-text-hover-color: #e0e0e0;
+	--button-text-active-color: #e0e0e0;
+	--button-text-color: #e0e0e0;
+}
+
+* {
+    box-sizing: inherit;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+body {
+	
+	font-family: Menlo, Helvetica Neue, sans-serif;
+	font-size: 12px;
+	line-height: 1.5;
+	color: var(--main-text-color);
+}
+
+#sapper {
+	display: grid;
+	grid-template-columns: auto minmax(auto, 600px) auto;
+	grid-template-rows: auto 1fr 30px;
+	height: 100%;
+    padding: 1rem;
+}
+
+@media (min-width: 400px) {
+	body {
+		font-size: 16px;
+	}
+}
+
+/* FIXME */
+
+.hat-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 140px);
+    grid-gap: 1rem;
+}
+
+.hat-list__item {
+    border: 1px solid #eee;
+    border-radius: 4px;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.new-hat__about-me {
+    width: 100%;
+    min-height: 3ch;
+    max-width: 500px;
+    display: block;
+    margin-bottom: .5rem;
+}
