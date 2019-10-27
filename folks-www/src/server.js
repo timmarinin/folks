@@ -32,7 +32,13 @@ app.use(session({
 	store: new RedisStore({
 		url: REDIS_URL
 	}),
-	secret: 'cat on a keyboard is generally a bad idea?',
+	cookie: {
+		secure: true,
+		maxAge: 1000 * 86400 * 14,
+		path: '/',
+		httpOnly: true,
+	},
+	secret: process.env.COOKIE_SECRET,
 	resave: true,
 	saveUninitialized: false
 }))
