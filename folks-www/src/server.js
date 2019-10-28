@@ -9,22 +9,10 @@ import {configureClient, checkToken, me } from './_serverApi.js'
 import multer from 'multer'
 const m = multer({ storage: multer.memoryStorage() })
 const RedisStore = ConnectRedis(session)
-import faye from 'faye'
-import fayeRedis from 'faye-redis'
 
 const { PORT, NODE_ENV, REDIS_URL } = process.env
 const dev = NODE_ENV === 'development'
 
-
-let bayeux = new faye.NodeAdapter({
-	mount: '/faye',
-	timeout: 45,
-	engine: {
-		type: fayeRedis,
-		host: 'localhost',
-		port: 6379
-	}
-});
 
 const app = express()
 
@@ -62,16 +50,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(compression({ threshold: 0 }))
 app.use(sirv('static', { dev }))
-app.use('/server-side-api', function(req, res, next) {
-	if (req.body.token='HELLO') {
-		bayeux.getClient().publish('/reader_feed/' + req.body.reader_feed, {
-			post: req.body.post
-		})
-		res.json({ok: true})
-	} else {
-		next()
-	}
-})
 app.use(async function (req, res, next) {
 	let token = null;
 	if (req.path.startsWith('/client/') || req.path === '/service-worker.js') {
@@ -115,11 +93,6 @@ app.use(sapper.middleware({
 	}
 }))
 
-
-
 const server = app.listen(PORT, err => {
 	if (err) console.log('Не смогли подключиться к серверу', err);
 });
-
-
-bayeux.attach(server);

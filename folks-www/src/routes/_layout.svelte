@@ -29,7 +29,7 @@
     import { onMount } from 'svelte'
     import Nav from '../components/Nav.svelte'
     import FlashMessages from '../components/FlashMessages.svelte'
-    import { wearableHats, setupFaye , user as userStore} from '../stores.js'
+    import { wearableHats,user as userStore} from '../stores.js'
     export let segment
     export let user = {}
     export let hats = []
@@ -37,16 +37,6 @@
     if (hats && hats.length) {
         wearableHats.set(hats)
     }
-    onMount(() => {
-        if (typeof window.Faye !== 'undefined') {
-            var client = new Faye.Client('/faye');
-            setupFaye(client);
-        } else {
-            console.log('no faye')
-        }
-    })
-
-
 </script>
 
 <style>
@@ -63,7 +53,4 @@ header, footer, .content {
     <slot />
 </div>
 
-{#if user && user.reader_feed }
-    <script src="/faye/client.js"></script>
-{/if}
 <footer>Folks. 2019-20xx. s v e l t e</footer>
