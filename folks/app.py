@@ -17,7 +17,7 @@ from api import bp as api_bp
 from api.errors import error_response as api_err
 from database import db_session
 
-app.register_blueprint(api_bp, url_prefix='/v2')
+app.register_blueprint(api_bp, url_prefix='/api/v2')
 
 
 @app.cli.command('createdevadmin')
