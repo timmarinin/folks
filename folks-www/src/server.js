@@ -16,6 +16,8 @@ const dev = NODE_ENV === 'development'
 
 const app = express()
 
+app.set('trust proxy', 1)
+
 app.use(session({
 	store: new RedisStore({
 		url: REDIS_URL
@@ -27,7 +29,7 @@ app.use(session({
 		httpOnly: true,
 	},
 	secret: process.env.COOKIE_SECRET,
-	resave: true,
+	resave: false,
 	saveUninitialized: false
 }))
 app.use(function (req, res, next) {
